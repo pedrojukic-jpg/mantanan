@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://mantanan.surge.sh/sitemap.xml
