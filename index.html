@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Mantanan — Manteles únicos tejidos a mano con lino y algodón. Cada pieza hecha especialmente para vos." />
+  <title>Mantanan — Manteles hechos con alma</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =====================================================
+       CSS CUSTOM PROPERTIES
+    ===================================================== */
+    :root {
+      --color-bg:           #F5F0E8;
+      --color-bg-alt:       #EDE5D0;
+      --color-bg-dark:      #2E2318;
+      --color-primary:      #8B5E3C;
+      --color-primary-dark: #6B4226;
+      --color-secondary:    #C4A882;
+      --color-text:         #3D2B1F;
+      --color-text-light:   #7A6048;
+      --color-text-inverse: #F5F0E8;
+      --color-border:       #D4C4A8;
+      --color-white:        #FDFAF5;
+
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body:    'Lato', Arial, sans-serif;
+
+      --transition-base: 0.3s ease;
+      --shadow-card: 0 2px 16px rgba(62, 43, 31, 0.08);
+      --shadow-card-hover: 0 8px 32px rgba(62, 43, 31, 0.16);
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 16px;
+    }
+
+    /* =====================================================
+       RESET & BASE
+    ===================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: var(--font-heading);
+      line-height: 1.2;
+      color: var(--color-text);
+    }
+
+    h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; }
+    h2 { font-size: clamp(1.6rem, 3.5vw, 2.6rem); font-weight: 600; }
+    h3 { font-size: clamp(1.1rem, 2.5vw, 1.5rem); font-weight: 600; }
+
+    p { color: var(--color-text); font-size: 1rem; line-height: 1.8; }
+
+    a {
+      color: var(--color-primary);
+      text-decoration: none;
+      transition: color var(--transition-base);
+    }
+    a:hover { color: var(--color-primary-dark); }
+
+    ul { list-style: none; }
+
+    img, svg { display: block; }
+
+    /* SKIP LINK */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 1rem;
+      z-index: 9999;
+      padding: 12px 24px;
+      background-color: var(--color-bg-dark);
+      color: var(--color-text-inverse);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 700;
+      border-radius: 0 0 8px 8px;
+      text-decoration: none;
+      transition: top 0.2s ease;
+    }
+    .skip-link:focus {
+      top: 0;
+      outline: 3px solid var(--color-secondary);
+      outline-offset: 2px;
+    }
+
+    /* FOCUS VISIBLE */
+    :focus:not(:focus-visible) {
+      outline: none;
+    }
+    :focus-visible {
+      outline: 3px solid var(--color-primary);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+    .btn:focus-visible {
+      outline: 3px solid var(--color-text-inverse);
+      outline-offset: 3px;
+      box-shadow: 0 0 0 6px var(--color-primary-dark);
+    }
+    .nav-links a:focus-visible,
+    .nav-mobile a:focus-visible {
+      outline: 3px solid var(--color-primary);
+      outline-offset: 4px;
+      border-radius: 2px;
+    }
+    .hamburger:focus-visible {
+      outline: 3px solid var(--color-primary);
+      outline-offset: 4px;
+    }
+    .logo-wrap:focus-visible {
+      outline: 3px solid var(--color-primary);
+      outline-offset: 4px;
+      border-radius: 2px;
+    }
+    .contact-card:focus-visible {
+      outline: 3px solid var(--color-primary);
+      outline-offset: 4px;
+    }
+    footer a:focus-visible {
+      outline: 3px solid var(--color-secondary);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+
+    .section-padding {
+      padding: 60px 0;
+    }
+
+    .section-label {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-text-light);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: var(--color-text-light);
+      margin-top: 0.75rem;
+      max-width: 600px;
+    }
+
+    /* =====================================================
+       BUTTONS
+    ===================================================== */
+    .btn {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.06em;
+      padding: 14px 32px;
+      border-radius: var(--radius-sm);
+      border: none;
+      cursor: pointer;
+      transition: background-color var(--transition-base), transform var(--transition-base), box-shadow var(--transition-base);
+      text-align: center;
+    }
+
+    .btn-primary {
+      background-color: var(--color-primary);
+      color: var(--color-text-inverse);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--color-primary-dark);
+      color: var(--color-text-inverse);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(107, 66, 38, 0.35);
+    }
+
+    /* =====================================================
+       HEADER / NAV
+    ===================================================== */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: var(--color-white);
+      box-shadow: 0 2px 12px rgba(62, 43, 31, 0.08);
+      transition: padding var(--transition-base), box-shadow var(--transition-base);
+    }
+
+    header .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 0;
+      transition: padding var(--transition-base);
+    }
+
+    header.header-scrolled .nav-inner {
+      padding: 12px 0;
+    }
+
+    header.header-scrolled {
+      box-shadow: 0 4px 20px rgba(62, 43, 31, 0.14);
+    }
+
+    .logo-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
+      text-decoration: none;
+    }
+
+    .logo-name {
+      font-family: var(--font-heading);
+      font-style: italic;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      line-height: 1;
+      letter-spacing: -0.01em;
+    }
+
+    .logo-tagline {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-text-light);
+      display: none;
+    }
+
+    .nav-links {
+      display: none;
+      align-items: center;
+      gap: 36px;
+    }
+
+    .nav-links a {
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-text-light);
+      text-decoration: none;
+      position: relative;
+      transition: color var(--transition-base);
+      padding: 8px 4px;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--color-primary);
+      transition: width var(--transition-base);
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--color-primary);
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+      min-width: 44px;
+      min-height: 44px;
+      border-radius: var(--radius-sm);
+      transition: background var(--transition-base);
+    }
+
+    .hamburger:hover {
+      background-color: var(--color-bg-alt);
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background-color: var(--color-text);
+      border-radius: 2px;
+      transition: transform var(--transition-base), opacity var(--transition-base);
+      transform-origin: center;
+    }
+
+    .hamburger[aria-expanded="true"] span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .hamburger[aria-expanded="true"] span:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+    .hamburger[aria-expanded="true"] span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* Mobile nav */
+    .nav-mobile {
+      display: flex;
+      flex-direction: column;
+      background-color: var(--color-white);
+      border-top: 1px solid var(--color-border);
+      padding: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding var(--transition-base);
+    }
+
+    .nav-mobile.open {
+      max-height: 400px;
+      padding: 16px 0 24px;
+    }
+
+    .nav-mobile a {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-text-light);
+      text-decoration: none;
+      padding: 12px 5%;
+      display: block;
+      border-bottom: 1px solid var(--color-border);
+      transition: color var(--transition-base), background var(--transition-base);
+    }
+
+    .nav-mobile a:last-child { border-bottom: none; }
+
+    .nav-mobile a:hover {
+      color: var(--color-primary);
+      background-color: var(--color-bg-alt);
+    }
+
+    /* =====================================================
+       SECTION #inicio -- HERO
+    ===================================================== */
+    #inicio {
+      min-height: 90vh;
+      background-color: var(--color-bg-alt);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-texture {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.45;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 760px;
+      padding: 60px 20px;
+    }
+
+    .hero-content h1 {
+      margin-bottom: 1.25rem;
+      color: var(--color-text);
+    }
+
+    .hero-content h1 em {
+      font-style: italic;
+      color: var(--color-primary-dark);
+    }
+
+    .hero-content .hero-subtitle {
+      font-size: 1.15rem;
+      color: var(--color-text-light);
+      margin-bottom: 2.5rem;
+      max-width: 540px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-deco-line {
+      width: 60px;
+      height: 2px;
+      background-color: var(--color-secondary);
+      margin: 0 auto 2rem;
+      border-radius: 2px;
+    }
+
+    /* =====================================================
+       SECTION #historia
+    ===================================================== */
+    #historia {
+      background-color: var(--color-bg);
+    }
+
+    .historia-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .historia-text .section-label { margin-bottom: 0.5rem; }
+    .historia-text h2 { margin-bottom: 1.5rem; }
+    .historia-text p { margin-bottom: 1.25rem; color: var(--color-text-light); }
+    .historia-text p:last-child { margin-bottom: 0; }
+
+    .historia-deco {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      order: -1;
+    }
+
+    /* =====================================================
+       SECTION #catalogo
+    ===================================================== */
+    #catalogo {
+      background-color: var(--color-bg-alt);
+    }
+
+    .catalogo-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .catalogo-header h2 { margin-bottom: 0.75rem; }
+    .catalogo-header .section-subtitle { margin: 0 auto; }
+
+    /* Materials */
+    .materiales-title {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-text-light);
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .materiales-grid {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+      justify-content: center;
+      margin-bottom: 56px;
+    }
+
+    .material-card {
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 36px 32px;
+      flex: 1;
+      max-width: 100%;
+      width: 100%;
+      text-align: center;
+      box-shadow: var(--shadow-card);
+      transition: box-shadow var(--transition-base), transform var(--transition-base);
+    }
+
+    .material-card:hover {
+      box-shadow: var(--shadow-card-hover);
+      transform: translateY(-3px);
+    }
+
+    .material-card .card-icon {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 20px;
+      color: var(--color-secondary);
+    }
+
+    .material-card h3 {
+      margin-bottom: 0.5rem;
+      color: var(--color-primary);
+    }
+
+    .material-card p {
+      font-size: 0.95rem;
+      color: var(--color-text-light);
+    }
+
+    /* Terminaciones */
+    .terminaciones-title {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-text-light);
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .terminaciones-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .terminacion-card {
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      transition: box-shadow var(--transition-base), transform var(--transition-base);
+    }
+
+    .terminacion-card:hover {
+      box-shadow: var(--shadow-card-hover);
+      transform: translateY(-3px);
+    }
+
+    .terminacion-visual {
+      width: 100%;
+      height: 140px;
+      background-color: var(--color-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .terminacion-visual svg {
+      width: 80%;
+      height: 80%;
+    }
+
+    .terminacion-body {
+      padding: 24px 20px;
+    }
+
+    .terminacion-body h3 {
+      margin-bottom: 0.4rem;
+      color: var(--color-primary);
+      font-size: 1.1rem;
+    }
+
+    .terminacion-body p {
+      font-size: 0.9rem;
+      color: var(--color-text-light);
+    }
+
+    .catalogo-nota {
+      text-align: center;
+      font-style: italic;
+      color: var(--color-text-light);
+      font-size: 0.95rem;
+      padding: 20px 32px;
+      background: var(--color-bg);
+      border-left: 3px solid var(--color-secondary);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* =====================================================
+       SECTION #proceso
+    ===================================================== */
+    #proceso {
+      background-color: var(--color-bg);
+    }
+
+    .proceso-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .proceso-header h2 { margin-bottom: 0.75rem; }
+
+    .proceso-steps {
+      max-width: 680px;
+      margin: 0 auto 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .paso {
+      display: flex;
+      gap: 28px;
+      position: relative;
+      padding-bottom: 40px;
+    }
+
+    .paso:last-child {
+      padding-bottom: 0;
+    }
+
+    .paso-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+      width: 48px;
+    }
+
+    .paso-num {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background-color: var(--color-secondary);
+      color: var(--color-text);
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .paso-line {
+      flex: 1;
+      width: 2px;
+      background-color: var(--color-border);
+      margin-top: 8px;
+      position: relative;
+    }
+
+    .paso-line::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 40%;
+      background-color: var(--color-secondary);
+      opacity: 0.5;
+    }
+
+    .paso:last-child .paso-line {
+      display: none;
+    }
+
+    .paso-content {
+      padding-top: 10px;
+      flex: 1;
+    }
+
+    .paso-content h3 {
+      margin-bottom: 0.4rem;
+      color: var(--color-primary);
+    }
+
+    .paso-content p {
+      font-size: 0.95rem;
+      color: var(--color-text-light);
+    }
+
+    .proceso-highlight {
+      background-color: var(--color-primary);
+      color: var(--color-text-inverse);
+      border-radius: var(--radius-md);
+      padding: 24px 20px;
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .proceso-highlight p {
+      color: var(--color-text-inverse);
+      font-family: var(--font-heading);
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    /* =====================================================
+       SECTION #contacto
+    ===================================================== */
+    #contacto {
+      background-color: var(--color-bg-alt);
+    }
+
+    .contacto-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .contacto-header h2 { margin-bottom: 0.75rem; }
+    .contacto-header .section-subtitle { margin: 0 auto; }
+
+    .contacto-cards {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+
+    .contact-card {
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 36px 28px;
+      flex: 1;
+      min-width: 220px;
+      max-width: 100%;
+      width: 100%;
+      text-align: center;
+      box-shadow: var(--shadow-card);
+      transition: box-shadow var(--transition-base), transform var(--transition-base);
+      cursor: pointer;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .contact-card:hover {
+      box-shadow: var(--shadow-card-hover);
+      transform: translateY(-2px);
+      color: var(--color-primary);
+    }
+
+    .contact-card .contact-icon {
+      width: 52px;
+      height: 52px;
+      color: var(--color-secondary);
+      transition: color var(--transition-base);
+    }
+
+    .contact-card:hover .contact-icon {
+      color: var(--color-primary);
+    }
+
+    .contact-card .contact-label {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-text-light);
+    }
+
+    .contact-card .contact-value {
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      color: var(--color-text);
+      font-weight: 600;
+    }
+
+    .contacto-cta {
+      text-align: center;
+      font-size: 0.95rem;
+      color: var(--color-text-light);
+      max-width: 520px;
+      margin: 0 auto;
+      font-style: italic;
+    }
+
+    /* =====================================================
+       FOOTER
+    ===================================================== */
+    footer {
+      background-color: var(--color-bg-dark);
+      color: var(--color-text-inverse);
+      border-top: 1px solid var(--color-primary);
+    }
+
+    .footer-inner {
+      padding: 56px 0 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      text-align: center;
+    }
+
+    .footer-logo .logo-name {
+      color: var(--color-secondary);
+      font-size: 2.2rem;
+    }
+
+    .footer-tagline {
+      font-size: 0.85rem;
+      color: var(--color-secondary);
+      opacity: 1;
+      font-family: var(--font-body);
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      margin-top: 4px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .footer-links a {
+      color: var(--color-secondary);
+      font-size: 0.85rem;
+      font-family: var(--font-body);
+      opacity: 0.8;
+      transition: opacity var(--transition-base);
+    }
+
+    .footer-links a:hover { opacity: 1; color: var(--color-secondary); }
+
+    .footer-sep {
+      color: var(--color-secondary);
+      opacity: 0.35;
+      font-size: 0.85rem;
+    }
+
+    .footer-copy {
+      font-size: 0.78rem;
+      color: #9A8070;
+      opacity: 1;
+      font-family: var(--font-body);
+      border-top: 1px solid rgba(196, 168, 130, 0.15);
+      padding-top: 24px;
+      width: 100%;
+      text-align: center;
+    }
+
+    /* =====================================================
+       RESPONSIVE — mobile-first
+    ===================================================== */
+
+    /* Historia deco SVG: smaller on mobile */
+    .historia-deco svg {
+      max-width: 180px;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 768px) {
+      .section-padding { padding: 80px 0; }
+
+      .logo-tagline { display: block; }
+
+      .materiales-grid {
+        flex-direction: row;
+        align-items: stretch;
+      }
+
+      .material-card {
+        max-width: 360px;
+        width: auto;
+      }
+
+      .contacto-cards {
+        flex-direction: row;
+        align-items: stretch;
+      }
+
+      .contact-card {
+        max-width: 300px;
+        width: auto;
+      }
+
+      .proceso-highlight { padding: 32px 40px; }
+    }
+
+    @media (min-width: 1024px) {
+      .hamburger { display: none; }
+
+      .nav-links { display: flex; }
+
+      .historia-grid {
+        grid-template-columns: 60fr 40fr;
+        gap: 64px;
+      }
+
+      .historia-deco {
+        order: 0;
+      }
+
+      .historia-deco svg {
+        max-width: 300px;
+      }
+
+      .terminaciones-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .terminacion-visual {
+        height: 160px;
+      }
+    }
+
+    /* REDUCED MOTION (WCAG 2.3.3) */
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        transition-delay: 0ms !important;
+      }
+      .nav-mobile {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+  <!-- =====================================================
+       HEADER
+  ===================================================== -->
+  <header id="site-header">
+    <div class="container">
+      <nav role="navigation" aria-label="Navegación principal">
+        <div class="nav-inner">
+          <a href="#inicio" class="logo-wrap" aria-label="Mantanan - Ir al inicio">
+            <span class="logo-name">Mantanan</span>
+            <span class="logo-tagline">Manteles hechos con alma</span>
+          </a>
+
+          <ul class="nav-links" role="list">
+            <li><a href="#inicio" class="nav-link">Inicio</a></li>
+            <li><a href="#historia" class="nav-link">Nuestra Historia</a></li>
+            <li><a href="#catalogo" class="nav-link">Catálogo</a></li>
+            <li><a href="#proceso" class="nav-link">El Proceso</a></li>
+            <li><a href="#contacto" class="nav-link">Contacto</a></li>
+          </ul>
+
+          <button
+            class="hamburger"
+            id="hamburger-btn"
+            aria-label="Abrir menú de navegación"
+            aria-expanded="false"
+            aria-controls="nav-mobile-menu"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Mobile menu -->
+    <div class="nav-mobile" id="nav-mobile-menu" role="navigation" aria-label="Menú móvil" aria-hidden="true">
+      <a href="#inicio" class="nav-link-mobile">Inicio</a>
+      <a href="#historia" class="nav-link-mobile">Nuestra Historia</a>
+      <a href="#catalogo" class="nav-link-mobile">Catálogo</a>
+      <a href="#proceso" class="nav-link-mobile">El Proceso</a>
+      <a href="#contacto" class="nav-link-mobile">Contacto</a>
+    </div>
+  </header>
+
+  <main id="main-content" tabindex="-1">
+
+    <!-- =====================================================
+         SECCION #inicio - HERO
+    ===================================================== -->
+    <section id="inicio" aria-label="Inicio">
+
+      <!-- SVG Textura tejido -->
+      <svg class="hero-texture" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <pattern id="weave" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+            <line x1="0" y1="6"  x2="24" y2="6"  stroke="#D4C4A8" stroke-width="1.2" stroke-linecap="round"/>
+            <line x1="0" y1="18" x2="24" y2="18" stroke="#D4C4A8" stroke-width="1.2" stroke-linecap="round"/>
+            <line x1="6"  y1="0" x2="6"  y2="24" stroke="#C4B498" stroke-width="1" stroke-linecap="round"/>
+            <line x1="18" y1="0" x2="18" y2="24" stroke="#C4B498" stroke-width="1" stroke-linecap="round"/>
+            <circle cx="6"  cy="6"  r="1.5" fill="#C4B498" opacity="0.6"/>
+            <circle cx="18" cy="18" r="1.5" fill="#C4B498" opacity="0.6"/>
+            <circle cx="6"  cy="18" r="1.5" fill="#D4C4A8" opacity="0.5"/>
+            <circle cx="18" cy="6"  r="1.5" fill="#D4C4A8" opacity="0.5"/>
+          </pattern>
+          <pattern id="diagonal" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+            <line x1="0" y1="40" x2="40" y2="0"   stroke="#C4B498" stroke-width="0.6" opacity="0.5"/>
+            <line x1="-10" y1="40" x2="30" y2="0" stroke="#D4C4A8" stroke-width="0.4" opacity="0.3"/>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#weave)"/>
+        <rect width="100%" height="100%" fill="url(#diagonal)" opacity="0.4"/>
+      </svg>
+
+      <div class="hero-content">
+        <p class="section-label">Artesanía textil</p>
+        <h1>Viste tu mesa con <em>alma artesanal</em></h1>
+        <div class="hero-deco-line"></div>
+        <p class="hero-subtitle">Manteles únicos, tejidos a mano con lino y algodón, hechos especialmente para vos.</p>
+        <a href="#contacto" class="btn btn-primary">Consulta tu mantel ideal</a>
+      </div>
+
+    </section>
+
+    <!-- =====================================================
+         SECCION #historia
+    ===================================================== -->
+    <section id="historia" class="section-padding" aria-label="Nuestra Historia">
+      <div class="container">
+        <div class="historia-grid">
+
+          <div class="historia-text">
+            <p class="section-label">Quienes somos</p>
+            <h2>Nuestra Historia</h2>
+            <p>Mariela es abogada de profesión, pero su verdadera vocación vive en el tejido. Entre expedientes y audiencias, sus manos encontraron en el lino y el algodón una forma de expresión que las palabras no siempre alcanzan.</p>
+            <p>Mantanan nació de esa necesidad de compartir. De poner en manos de otros algo hecho con tiempo, con cuidado, con intención. Cada mantel que sale de sus agujas lleva consigo horas de dedicación y la certeza de que adornara mesas donde se comparten momentos que importan.</p>
+            <p>Su misión es simple y profunda a la vez: que otros puedan disfrutar de su pasión y dejar una marca única en cada hogar. Un mantel hecho a mano no es solo tela: es presencia, es calidez, es identidad.</p>
+          </div>
+
+          <div class="historia-deco" aria-hidden="true">
+            <svg viewBox="0 0 320 380" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:300px;" aria-hidden="true" role="presentation">
+              <!-- Sombra ovillo -->
+              <ellipse cx="160" cy="320" rx="90" ry="16" fill="#C4A882" opacity="0.18"/>
+
+              <!-- Aguja izquierda -->
+              <g transform="rotate(-22, 100, 200)">
+                <rect x="92" y="80" width="10" height="220" rx="5" fill="#C4A882" opacity="0.85"/>
+                <ellipse cx="97" cy="80" rx="5" ry="5" fill="#8B5E3C"/>
+                <polygon points="92,80 102,80 97,62" fill="#8B5E3C"/>
+                <ellipse cx="97" cy="300" rx="8" ry="8" fill="#8B5E3C" opacity="0.7"/>
+                <ellipse cx="97" cy="300" rx="5" ry="5" fill="#C4A882"/>
+              </g>
+
+              <!-- Aguja derecha -->
+              <g transform="rotate(18, 220, 190)">
+                <rect x="212" y="90" width="10" height="220" rx="5" fill="#C4A882" opacity="0.85"/>
+                <ellipse cx="217" cy="90" rx="5" ry="5" fill="#8B5E3C"/>
+                <polygon points="212,90 222,90 217,72" fill="#8B5E3C"/>
+                <ellipse cx="217" cy="310" rx="8" ry="8" fill="#8B5E3C" opacity="0.7"/>
+                <ellipse cx="217" cy="310" rx="5" ry="5" fill="#C4A882"/>
+              </g>
+
+              <!-- Ovillo -->
+              <circle cx="160" cy="220" r="80" fill="#C4A882" opacity="0.15"/>
+              <circle cx="160" cy="220" r="75" fill="none" stroke="#C4A882" stroke-width="2" opacity="0.4"/>
+              <ellipse cx="160" cy="220" rx="68" ry="60" fill="none" stroke="#C4A882" stroke-width="18" opacity="0.28"/>
+              <ellipse cx="160" cy="220" rx="50" ry="42" fill="none" stroke="#8B5E3C" stroke-width="14" opacity="0.22"/>
+              <ellipse cx="160" cy="220" rx="34" ry="28" fill="none" stroke="#C4A882" stroke-width="10" opacity="0.30"/>
+              <ellipse cx="160" cy="220" rx="20" ry="16" fill="none" stroke="#8B5E3C" stroke-width="8" opacity="0.25"/>
+              <circle cx="160" cy="220" r="8" fill="#C4A882" opacity="0.5"/>
+
+              <line x1="95"  y1="185" x2="225" y2="255" stroke="#8B5E3C" stroke-width="1.5" opacity="0.18"/>
+              <line x1="92"  y1="215" x2="228" y2="230" stroke="#C4A882" stroke-width="1.2" opacity="0.20"/>
+              <line x1="105" y1="160" x2="210" y2="278" stroke="#8B5E3C" stroke-width="1"   opacity="0.15"/>
+              <line x1="125" y1="148" x2="192" y2="292" stroke="#C4A882" stroke-width="1"   opacity="0.15"/>
+              <line x1="160" y1="145" x2="160" y2="295" stroke="#8B5E3C" stroke-width="1.2" opacity="0.12"/>
+
+              <!-- Hilos sueltos -->
+              <path d="M 105 185 Q 80 140, 97 95" fill="none" stroke="#C4A882" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+              <path d="M 215 190 Q 240 150, 222 100" fill="none" stroke="#C4A882" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+
+              <circle cx="105" cy="186" r="3.5" fill="#8B5E3C" opacity="0.55"/>
+              <circle cx="215" cy="190" r="3.5" fill="#8B5E3C" opacity="0.55"/>
+
+              <text x="160" y="310" text-anchor="middle" font-family="'Playfair Display', serif" font-style="italic" font-size="13" fill="#C4A882" opacity="0.65">hecho a mano</text>
+            </svg>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         SECCION #catalogo
+    ===================================================== -->
+    <section id="catalogo" class="section-padding" aria-label="Catálogo y Materiales">
+      <div class="container">
+
+        <div class="catalogo-header">
+          <p class="section-label">Lo que hacemos</p>
+          <h2>Catálogo y Materiales</h2>
+          <p class="section-subtitle">Cada pieza es única. Estos son algunos de nuestros estilos.</p>
+        </div>
+
+        <!-- Materiales -->
+        <p class="materiales-title">Nuestros materiales</p>
+        <div class="materiales-grid">
+
+          <!-- Tarjeta Lino -->
+          <div class="material-card">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" fill="none">
+                <path d="M30 52 C30 52 12 38 12 22 C12 13 20 6 30 6 C40 6 48 13 48 22 C48 38 30 52 30 52Z" fill="currentColor" opacity="0.18"/>
+                <path d="M30 52 C30 52 12 38 12 22 C12 13 20 6 30 6 C40 6 48 13 48 22 C48 38 30 52 30 52Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                <line x1="30" y1="52" x2="30" y2="8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="30" y1="20" x2="20" y2="15" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+                <line x1="30" y1="20" x2="40" y2="15" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+                <line x1="30" y1="28" x2="18" y2="23" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+                <line x1="30" y1="28" x2="42" y2="23" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+                <line x1="30" y1="36" x2="16" y2="32" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+                <line x1="30" y1="36" x2="44" y2="32" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+                <line x1="30" y1="52" x2="24" y2="58" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity="0.5"/>
+                <line x1="30" y1="52" x2="36" y2="58" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity="0.5"/>
+              </svg>
+            </div>
+            <h3>Lino Natural</h3>
+            <p>Fibra natural, fresca y resistente. Desarrolla caracter con cada lavado.</p>
+          </div>
+
+          <!-- Tarjeta Algodón -->
+          <div class="material-card">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" fill="none">
+                <line x1="30" y1="54" x2="30" y2="36" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M30 46 Q22 42 19 36 Q26 38 30 46Z" fill="currentColor" opacity="0.4"/>
+                <path d="M30 42 Q38 38 41 32 Q34 34 30 42Z" fill="currentColor" opacity="0.4"/>
+                <path d="M21 36 L24 30 L30 28 L36 30 L39 36 Z" fill="currentColor" opacity="0.25"/>
+                <ellipse cx="30" cy="20" rx="9"  ry="8"  fill="currentColor" opacity="0.55"/>
+                <ellipse cx="22" cy="24" rx="7"  ry="6.5" fill="currentColor" opacity="0.5"/>
+                <ellipse cx="38" cy="24" rx="7"  ry="6.5" fill="currentColor" opacity="0.5"/>
+                <ellipse cx="24" cy="15" rx="7"  ry="6.5" fill="currentColor" opacity="0.45"/>
+                <ellipse cx="36" cy="15" rx="7"  ry="6.5" fill="currentColor" opacity="0.45"/>
+                <circle cx="30" cy="19" r="4" fill="currentColor" opacity="0.2"/>
+                <circle cx="26" cy="17" r="1.2" fill="currentColor" opacity="0.35"/>
+                <circle cx="34" cy="17" r="1.2" fill="currentColor" opacity="0.35"/>
+                <circle cx="30" cy="14" r="1.2" fill="currentColor" opacity="0.35"/>
+                <circle cx="29" cy="22" r="1.2" fill="currentColor" opacity="0.3"/>
+              </svg>
+            </div>
+            <h3>Algodón Puro</h3>
+            <p>Suavidad y versatilidad. Ideal para el uso cotidiano.</p>
+          </div>
+
+        </div>
+
+        <!-- Terminaciones -->
+        <p class="terminaciones-title">Estilos de terminación</p>
+        <div class="terminaciones-grid">
+
+          <!-- Dobladillo Simple -->
+          <div class="terminacion-card">
+            <div class="terminacion-visual" aria-hidden="true">
+              <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+                <rect x="20" y="20" width="160" height="80" rx="2" fill="#EDE5D0" stroke="#C4A882" stroke-width="2"/>
+                <rect x="28" y="28" width="144" height="64" rx="1" fill="none" stroke="#D4C4A8" stroke-width="1.5" stroke-dasharray="6,4"/>
+                <line x1="20" y1="35" x2="180" y2="35" stroke="#C4B498" stroke-width="0.5" opacity="0.4"/>
+                <line x1="20" y1="47" x2="180" y2="47" stroke="#C4B498" stroke-width="0.5" opacity="0.4"/>
+                <line x1="20" y1="59" x2="180" y2="59" stroke="#C4B498" stroke-width="0.5" opacity="0.4"/>
+                <line x1="20" y1="71" x2="180" y2="71" stroke="#C4B498" stroke-width="0.5" opacity="0.4"/>
+                <line x1="20" y1="83" x2="180" y2="83" stroke="#C4B498" stroke-width="0.5" opacity="0.4"/>
+                <line x1="50"  y1="20" x2="50"  y2="100" stroke="#C4B498" stroke-width="0.5" opacity="0.3"/>
+                <line x1="90"  y1="20" x2="90"  y2="100" stroke="#C4B498" stroke-width="0.5" opacity="0.3"/>
+                <line x1="130" y1="20" x2="130" y2="100" stroke="#C4B498" stroke-width="0.5" opacity="0.3"/>
+                <line x1="170" y1="20" x2="170" y2="100" stroke="#C4B498" stroke-width="0.5" opacity="0.3"/>
+              </svg>
+            </div>
+            <div class="terminacion-body">
+              <h3>Dobladillo Simple</h3>
+              <p>Elegante y atemporal. El acabado clasico que nunca falla.</p>
+            </div>
+          </div>
+
+          <!-- Con Flecos -->
+          <div class="terminacion-card">
+            <div class="terminacion-visual" aria-hidden="true">
+              <svg viewBox="0 0 200 130" xmlns="http://www.w3.org/2000/svg">
+                <rect x="20" y="10" width="160" height="80" rx="2" fill="#EDE5D0" stroke="#C4A882" stroke-width="2"/>
+                <line x1="20" y1="26" x2="180" y2="26" stroke="#C4B498" stroke-width="0.5" opacity="0.4"/>
+                <line x1="20" y1="42" x2="180" y2="42" stroke="#C4B498" stroke-width="0.5" opacity="0.4"/>
+                <line x1="20" y1="58" x2="180" y2="58" stroke="#C4B498" stroke-width="0.5" opacity="0.4"/>
+                <line x1="20" y1="74" x2="180" y2="74" stroke="#C4B498" stroke-width="0.5" opacity="0.4"/>
+                <!-- Flecos -->
+                <line x1="23"  y1="90" x2="20"  y2="118" stroke="#C4A882" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="30"  y1="90" x2="29"  y2="122" stroke="#8B5E3C" stroke-width="2"   stroke-linecap="round"/>
+                <line x1="37"  y1="90" x2="35"  y2="119" stroke="#C4A882" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="44"  y1="90" x2="44"  y2="124" stroke="#8B5E3C" stroke-width="2"   stroke-linecap="round"/>
+                <line x1="51"  y1="90" x2="49"  y2="120" stroke="#C4A882" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="58"  y1="90" x2="57"  y2="122" stroke="#8B5E3C" stroke-width="2"   stroke-linecap="round"/>
+                <line x1="65"  y1="90" x2="63"  y2="118" stroke="#C4A882" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="72"  y1="90" x2="72"  y2="124" stroke="#8B5E3C" stroke-width="2"   stroke-linecap="round"/>
+                <line x1="79"  y1="90" x2="77"  y2="120" stroke="#C4A882" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="86"  y1="90" x2="86"  y2="122" stroke="#8B5E3C" stroke-width="2"   stroke-linecap="round"/>
+                <line x1="93"  y1="90" x2="91"  y2="119" stroke="#C4A882" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="100" y1="90" x2="100" y2="124" stroke="#8B5E3C" stroke-width="2"   stroke-linecap="round"/>
+                <line x1="107" y1="90" x2="105" y2="120" stroke="#C4A882" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="114" y1="90" x2="114" y2="122" stroke="#8B5E3C" stroke-width="2"   stroke-linecap="round"/>
+                <line x1="121" y1="90" x2="119" y2="118" stroke="#C4A882" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="128" y1="90" x2="128" y2="124" stroke="#8B5E3C" stroke-width="2"   stroke-linecap="round"/>
+                <line x1="135" y1="90" x2="133" y2="120" stroke="#C4A882" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="142" y1="90" x2="142" y2="122" stroke="#8B5E3C" stroke-width="2"   stroke-linecap="round"/>
+                <line x1="149" y1="90" x2="147" y2="119" stroke="#C4A882" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="156" y1="90" x2="156" y2="124" stroke="#8B5E3C" stroke-width="2"   stroke-linecap="round"/>
+                <line x1="163" y1="90" x2="161" y2="120" stroke="#C4A882" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="170" y1="90" x2="170" y2="122" stroke="#8B5E3C" stroke-width="2"   stroke-linecap="round"/>
+                <line x1="177" y1="90" x2="175" y2="118" stroke="#C4A882" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="terminacion-body">
+              <h3>Con Flecos</h3>
+              <p>Textura y movimiento. Un toque bohemio y artesanal.</p>
+            </div>
+          </div>
+
+          <!-- Con Volados -->
+          <div class="terminacion-card">
+            <div class="terminacion-visual" aria-hidden="true">
+              <svg viewBox="0 0 200 130" xmlns="http://www.w3.org/2000/svg">
+                <rect x="20" y="10" width="160" height="72" rx="2" fill="#EDE5D0" stroke="#C4A882" stroke-width="2"/>
+                <line x1="20" y1="26" x2="180" y2="26" stroke="#C4B498" stroke-width="0.5" opacity="0.4"/>
+                <line x1="20" y1="42" x2="180" y2="42" stroke="#C4B498" stroke-width="0.5" opacity="0.4"/>
+                <line x1="20" y1="58" x2="180" y2="58" stroke="#C4B498" stroke-width="0.5" opacity="0.4"/>
+                <line x1="20" y1="74" x2="180" y2="74" stroke="#C4B498" stroke-width="0.5" opacity="0.4"/>
+                <!-- Volado ondulado capa 1 -->
+                <path d="M20,82 Q29,72 38,84 Q47,96 56,84 Q65,72 74,84 Q83,96 92,84 Q101,72 110,84 Q119,96 128,84 Q137,72 146,84 Q155,96 164,84 Q173,72 180,82 L180,94 Q173,84 164,96 Q155,108 146,96 Q137,84 128,96 Q119,108 110,96 Q101,84 92,96 Q83,108 74,96 Q65,84 56,96 Q47,108 38,96 Q29,84 20,94 Z" fill="#EDE5D0" stroke="#C4A882" stroke-width="1.5"/>
+                <!-- Volado ondulado capa 2 -->
+                <path d="M20,96 Q29,86 38,98 Q47,110 56,98 Q65,86 74,98 Q83,110 92,98 Q101,86 110,98 Q119,110 128,98 Q137,86 146,98 Q155,110 164,98 Q173,86 180,96 L180,124 L20,124 Z" fill="#F5F0E8" stroke="#C4A882" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <div class="terminacion-body">
+              <h3>Con Volados</h3>
+              <p>Delicadeza y feminidad. Para mesas de celebracion.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <p class="catalogo-nota">No tenemos stock fijo. Cada mantel se confecciona a pedido, en el tamaño, color y terminación que elijas.</p>
+
+      </div>
+    </section>
+
+    <!-- =====================================================
+         SECCION #proceso
+    ===================================================== -->
+    <section id="proceso" class="section-padding" aria-label="Proceso de confección">
+      <div class="container">
+
+        <div class="proceso-header">
+          <p class="section-label">Cómo trabajamos</p>
+          <h2>Cómo es el proceso</h2>
+        </div>
+
+        <div class="proceso-steps" role="list">
+
+          <div class="paso" role="listitem">
+            <div class="paso-left" aria-hidden="true">
+              <div class="paso-num">1</div>
+              <div class="paso-line"></div>
+            </div>
+            <div class="paso-content">
+              <h3>Consulta con nosotras</h3>
+              <p>Contanos que necesitas: medidas, material, terminación y colores. Te asesoramos sin compromiso.</p>
+            </div>
+          </div>
+
+          <div class="paso" role="listitem">
+            <div class="paso-left" aria-hidden="true">
+              <div class="paso-num">2</div>
+              <div class="paso-line"></div>
+            </div>
+            <div class="paso-content">
+              <h3>Diseñamos juntas</h3>
+              <p>Te damos todas las opciones y acordamos los detalles. Vos elegis, nosotras confeccionamos.</p>
+            </div>
+          </div>
+
+          <div class="paso" role="listitem">
+            <div class="paso-left" aria-hidden="true">
+              <div class="paso-num">3</div>
+              <div class="paso-line"></div>
+            </div>
+            <div class="paso-content">
+              <h3>Manos a la obra</h3>
+              <p>El tiempo de confección es de aproximadamente 20 días hábiles. No pedimos seña por adelantado.</p>
+            </div>
+          </div>
+
+          <div class="paso" role="listitem">
+            <div class="paso-left" aria-hidden="true">
+              <div class="paso-num">4</div>
+            </div>
+            <div class="paso-content">
+              <h3>Tu mantel llega</h3>
+              <p>Coordinamos la entrega o el envio. Tu mesa te espera.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="proceso-highlight" role="note">
+          <p>"Sin seña por adelantado. Sin apuro. Con todo el cuidado."</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =====================================================
+         SECCION #contacto
+    ===================================================== -->
+    <section id="contacto" class="section-padding" aria-label="Contacto">
+      <div class="container">
+
+        <div class="contacto-header">
+          <p class="section-label">Escribinos</p>
+          <h2>Hablemos</h2>
+          <p class="section-subtitle">Cada mantel empieza con una conversacion. Escribinos y empecemos a imaginar el tuyo.</p>
+        </div>
+
+        <div class="contacto-cards">
+
+          <!-- Email -->
+          <a
+            href="mailto:mantanan@gmail.com"
+            class="contact-card"
+            aria-label="Enviarnos un email a mantanan@gmail.com"
+          >
+            <svg class="contact-icon" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true">
+              <rect x="6" y="14" width="40" height="28" rx="3" stroke="currentColor" stroke-width="2.2"/>
+              <polyline points="6,14 26,30 46,14" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+              <line x1="6"  y1="42" x2="20" y2="30" stroke="currentColor" stroke-width="1.5" opacity="0.5"/>
+              <line x1="46" y1="42" x2="32" y2="30" stroke="currentColor" stroke-width="1.5" opacity="0.5"/>
+            </svg>
+            <span class="contact-label">Email</span>
+            <span class="contact-value">mantanan@gmail.com</span>
+          </a>
+
+          <!-- Instagram -->
+          <a
+            href="https://www.instagram.com/Mantanan"
+            class="contact-card"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Visitarnos en Instagram @Mantanan (abre en nueva pestaña)"
+          >
+            <svg class="contact-icon" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true">
+              <rect x="8" y="8" width="36" height="36" rx="10" stroke="currentColor" stroke-width="2.2"/>
+              <circle cx="26" cy="26" r="9" stroke="currentColor" stroke-width="2"/>
+              <circle cx="26" cy="26" r="5" stroke="currentColor" stroke-width="1.5" opacity="0.5"/>
+              <circle cx="38" cy="14" r="2.5" fill="currentColor"/>
+              <circle cx="22" cy="22" r="1.5" fill="currentColor" opacity="0.3"/>
+            </svg>
+            <span class="contact-label">Instagram</span>
+            <span class="contact-value">@Mantanan</span>
+          </a>
+
+          <!-- WhatsApp -->
+          <a
+            href="https://wa.me/5493414567890?text=Hola%20Mantanan%2C%20me%20gustar%C3%ADa%20consultar%20sobre%20un%20mantel."
+            class="contact-card"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Escribirnos por WhatsApp al +54 9 341 456-7890 (abre en nueva pestaña)"
+          >
+            <svg class="contact-icon" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true">
+              <path d="M8 40 L12 30 A20 20 0 1 1 22 42 Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" fill="none"/>
+              <circle cx="19" cy="26" r="2.5" fill="currentColor" opacity="0.7"/>
+              <circle cx="26" cy="26" r="2.5" fill="currentColor" opacity="0.7"/>
+              <circle cx="33" cy="26" r="2.5" fill="currentColor" opacity="0.7"/>
+            </svg>
+            <span class="contact-label">WhatsApp</span>
+            <span class="contact-value">+54 9 341 456-7890</span>
+          </a>
+
+        </div>
+
+        <p class="contacto-cta">¡También podés escribirnos directamente por Instagram o WhatsApp. ¡Respondemos a la brevedad!</p>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =====================================================
+       FOOTER
+  ===================================================== -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+
+        <div class="footer-logo logo-wrap">
+          <span class="logo-name">Mantanan</span>
+          <span class="footer-tagline">Manteles hechos con alma - Buenos Aires, Argentina</span>
+        </div>
+
+        <nav class="footer-links" aria-label="Links de contacto">
+          <a href="mailto:mantanan@gmail.com" aria-label="Email">Email</a>
+          <span class="footer-sep" aria-hidden="true">|</span>
+          <a href="https://www.instagram.com/Mantanan" target="_blank" rel="noopener noreferrer" aria-label="Instagram @Mantanan (abre en nueva pestaña)">@Mantanan</a>
+          <span class="footer-sep" aria-hidden="true">|</span>
+          <a href="https://wa.me/5493414567890?text=Hola%20Mantanan%2C%20me%20gustar%C3%ADa%20consultar%20sobre%20un%20mantel." target="_blank" rel="noopener noreferrer" aria-label="WhatsApp +54 9 341 456-7890 (abre en nueva pestaña)">WhatsApp</a>
+        </nav>
+
+        <p class="footer-copy">&copy; 2026 Mantanan. Todos los derechos reservados.</p>
+
+      </div>
+    </div>
+  </footer>
+
+  <!-- =====================================================
+       JAVASCRIPT
+  ===================================================== -->
+  <script>
+    (function () {
+      'use strict';
+
+      var header      = document.getElementById('site-header');
+      var hamburger   = document.getElementById('hamburger-btn');
+      var mobileMenu  = document.getElementById('nav-mobile-menu');
+      var navLinks    = document.querySelectorAll('.nav-link');
+      var mobileLinks = document.querySelectorAll('.nav-link-mobile');
+      var sections    = document.querySelectorAll('main section[id]');
+
+      /* SMOOTH SCROLL HELPER */
+      function smoothScrollTo(el) {
+        var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        el.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+      }
+
+      /* 1. HAMBURGER TOGGLE */
+      hamburger.addEventListener('click', function () {
+        var isOpen = mobileMenu.classList.toggle('open');
+        hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        hamburger.setAttribute(
+          'aria-label',
+          isOpen ? 'Cerrar menú de navegación' : 'Abrir menú de navegación'
+        );
+        mobileMenu.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+      });
+
+      /* 2. CERRAR MENU al click en link */
+      mobileLinks.forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          var target = document.querySelector(link.getAttribute('href'));
+          closeMobileMenu();
+          if (target) {
+            setTimeout(function () {
+              smoothScrollTo(target);
+            }, 60);
+          }
+        });
+      });
+
+      function closeMobileMenu() {
+        mobileMenu.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        hamburger.setAttribute('aria-label', 'Abrir menú de navegación');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+      }
+
+      /* 3. HEADER-SCROLLED al scroll >50px */
+      function handleScroll() {
+        if (window.scrollY > 50) {
+          header.classList.add('header-scrolled');
+        } else {
+          header.classList.remove('header-scrolled');
+        }
+        updateActiveNav();
+      }
+
+      window.addEventListener('scroll', handleScroll, { passive: true });
+
+      /* 4. ACTIVE NAV LINK */
+      function updateActiveNav() {
+        var scrollY   = window.scrollY;
+        var threshold = header.offsetHeight + 20;
+        var current   = '';
+
+        sections.forEach(function (section) {
+          var top = section.offsetTop - threshold;
+          if (scrollY >= top) {
+            current = section.getAttribute('id');
+          }
+        });
+
+        navLinks.forEach(function (link) {
+          link.classList.remove('active');
+          link.removeAttribute('aria-current');
+          if (link.getAttribute('href') === '#' + current) {
+            link.classList.add('active');
+            link.setAttribute('aria-current', 'true');
+          }
+        });
+      }
+
+      /* 5. SMOOTH SCROLL desktop nav */
+      navLinks.forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          var target = document.querySelector(link.getAttribute('href'));
+          if (target) {
+            smoothScrollTo(target);
+          }
+        });
+      });
+
+      /* Logo smooth scroll */
+      var logoLink = document.querySelector('a.logo-wrap');
+      if (logoLink) {
+        logoLink.addEventListener('click', function (e) {
+          e.preventDefault();
+          var target = document.querySelector(logoLink.getAttribute('href'));
+          if (target) {
+            smoothScrollTo(target);
+          }
+        });
+      }
+
+      handleScroll();
+
+    })();
+  </script>
+
+</body>
+</html>
