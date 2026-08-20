@@ -956,6 +956,124 @@
         transition: none;
       }
     }
+
+    /* ===== TIENDA ===== */
+    .tienda-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .tienda-header h2 { margin-bottom: 0.75rem; }
+
+    .producto-card {
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 32px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .producto-nombre {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--color-text);
+      margin-bottom: 4px;
+    }
+    .producto-detalle {
+      font-size: 0.9rem;
+      color: var(--color-text-light);
+      margin-bottom: 16px;
+    }
+    .producto-precio {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.75rem;
+      color: var(--color-primary);
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+
+    .color-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-text-light);
+      margin-bottom: 12px;
+    }
+    .colores-grupo {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    .color-opcion input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .color-opcion label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border: 2px solid var(--color-border);
+      border-radius: 24px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      color: var(--color-text);
+      transition: border-color 0.2s, background 0.2s;
+      user-select: none;
+    }
+    .color-opcion input[type="radio"]:checked + label {
+      border-color: var(--color-primary);
+      background: #fdf6ef;
+    }
+    .color-opcion input[type="radio"]:focus-visible + label {
+      outline: 3px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+    .color-swatch {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,0,0,0.15);
+      flex-shrink: 0;
+    }
+    .swatch-blanco { background: #f8f8f8; }
+    .swatch-azul   { background: #4a7fbd; }
+    .swatch-gris   { background: #9e9e9e; }
+
+    .btn-mp {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 14px 24px;
+      background: #009ee3;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, opacity 0.2s;
+      margin-bottom: 12px;
+    }
+    .btn-mp:hover { background: #007bb5; }
+    .btn-mp:disabled, .btn-mp[aria-disabled="true"] {
+      opacity: 0.45;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    .btn-mp svg { flex-shrink: 0; }
+    .tienda-nota {
+      font-size: 0.8rem;
+      color: var(--color-text-light);
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -978,6 +1096,7 @@
             <li><a href="#inicio" class="nav-link">Inicio</a></li>
             <li><a href="#historia" class="nav-link">Nuestra Historia</a></li>
             <li><a href="#catalogo" class="nav-link">Catálogo</a></li>
+            <li><a href="#tienda" class="nav-link">Tienda</a></li>
             <li><a href="#proceso" class="nav-link">El Proceso</a></li>
             <li><a href="#contacto" class="nav-link">Contacto</a></li>
           </ul>
@@ -1002,6 +1121,7 @@
       <a href="#inicio" class="nav-link-mobile">Inicio</a>
       <a href="#historia" class="nav-link-mobile">Nuestra Historia</a>
       <a href="#catalogo" class="nav-link-mobile">Catálogo</a>
+      <a href="#tienda" class="nav-link-mobile">Tienda</a>
       <a href="#proceso" class="nav-link-mobile">El Proceso</a>
       <a href="#contacto" class="nav-link-mobile">Contacto</a>
     </div>
@@ -1274,6 +1394,70 @@
     </section>
 
     <!-- =====================================================
+         SECCION #tienda
+    ===================================================== -->
+    <section id="tienda" class="section-padding" aria-label="Tienda">
+      <div class="container">
+
+        <div class="tienda-header">
+          <p class="section-label">Comprá online</p>
+          <h2>Tienda</h2>
+          <p class="section-subtitle">Elegí tu color y pagá de forma segura con Mercado Pago.</p>
+        </div>
+
+        <div class="producto-card">
+          <p class="producto-nombre">Mantel 1×1 m</p>
+          <p class="producto-detalle">Hecho a pedido · Entrega aprox. 20 días</p>
+          <p class="producto-precio">$100.000</p>
+
+          <p class="color-label">Elegí el color</p>
+          <div class="colores-grupo" role="group" aria-label="Color del mantel">
+            <div class="color-opcion">
+              <input type="radio" name="color" id="color-blanco" value="blanco" checked>
+              <label for="color-blanco">
+                <span class="color-swatch swatch-blanco" aria-hidden="true"></span>
+                Blanco
+              </label>
+            </div>
+            <div class="color-opcion">
+              <input type="radio" name="color" id="color-azul" value="azul">
+              <label for="color-azul">
+                <span class="color-swatch swatch-azul" aria-hidden="true"></span>
+                Azul
+              </label>
+            </div>
+            <div class="color-opcion">
+              <input type="radio" name="color" id="color-gris" value="gris">
+              <label for="color-gris">
+                <span class="color-swatch swatch-gris" aria-hidden="true"></span>
+                Gris
+              </label>
+            </div>
+          </div>
+
+          <a
+            id="btn-pagar"
+            class="btn-mp"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Pagar con Mercado Pago"
+          >
+            <!-- Logo MP -->
+            <svg width="22" height="22" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="24" cy="24" r="24" fill="#fff"/>
+              <path d="M9 24C9 15.716 15.716 9 24 9s15 6.716 15 15-6.716 15-15 15S9 32.284 9 24z" fill="#009ee3"/>
+              <path d="M24 14c-5.523 0-10 4.477-10 10s4.477 10 10 10 10-4.477 10-10-4.477-10-10-10zm0 17.5c-4.142 0-7.5-3.358-7.5-7.5s3.358-7.5 7.5-7.5 7.5 3.358 7.5 7.5-3.358 7.5-7.5 7.5z" fill="#fff"/>
+            </svg>
+            Pagar con Mercado Pago
+          </a>
+          <p class="tienda-nota">Pago seguro · Tarjeta, débito o transferencia</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =====================================================
          SECCION #proceso
     ===================================================== -->
     <section id="proceso" class="section-padding" aria-label="Proceso de confección">
@@ -1446,6 +1630,30 @@
   <script>
     (function () {
       'use strict';
+
+      /* MERCADO PAGO — reemplazá estas URLs con tus links de pago reales */
+      var mpLinks = {
+        blanco: 'https://mpago.la/REEMPLAZAR_BLANCO',
+        azul:   'https://mpago.la/REEMPLAZAR_AZUL',
+        gris:   'https://mpago.la/REEMPLAZAR_GRIS'
+      };
+
+      var btnPagar = document.getElementById('btn-pagar');
+      var colorInputs = document.querySelectorAll('input[name="color"]');
+
+      function actualizarLinkMP() {
+        var seleccionado = document.querySelector('input[name="color"]:checked');
+        if (seleccionado && btnPagar) {
+          var color = seleccionado.value;
+          btnPagar.href = mpLinks[color];
+          btnPagar.setAttribute('aria-label', 'Pagar con Mercado Pago — Mantel ' + color.charAt(0).toUpperCase() + color.slice(1));
+        }
+      }
+
+      colorInputs.forEach(function(input) {
+        input.addEventListener('change', actualizarLinkMP);
+      });
+      actualizarLinkMP();
 
       var header      = document.getElementById('site-header');
       var hamburger   = document.getElementById('hamburger-btn');
